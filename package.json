@@ -19,6 +19,7 @@
     "mailgun-js": "^0.7.1",
     "manta": "^1.5.1",
     "mongoose": "^4.0.6",
+    "mongoose-unique-validator": "^0.4.1",
     "node-geocoder": "^2.21.2",
     "nodemailer": "^0.7.1",
     "nodemailer-mailgun-transport": "git+https://github.com/orliesaurus/nodemailer-mailgun-transport.git",

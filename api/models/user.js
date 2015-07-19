@@ -29,21 +29,23 @@ var UserSchema = new Schema({
 		type: String,
 		trim: true,
 		default: '',
-		validate: [validateLocalStrategyProperty, 'Please fill in your first name']
+		validate: [validateLocalStrategyProperty, 'your first name']
 	},
 	lastName: {
 		type: String,
 		trim: true,
 		default: '',
-		validate: [validateLocalStrategyProperty, 'Please fill in your last name']
+		validate: [validateLocalStrategyProperty, 'your last name']
 	},
 	displayName: {
 		type: String,
 		trim: true
 	},
+	role: {
+		type: String
+	},
 	phone: {
-		type: String,
-		required: 'Please fill in a phone',
+		type: String
 	},
 	mobile: {
 		type: String,
@@ -57,21 +59,9 @@ var UserSchema = new Schema({
 		validate: [validateLocalStrategyProperty, "S'il vous plaît remplire  votre e-mail"],
 		match: [/.+\@.+\..+/, "S'il vous plaît remplire une adresse email valide"]
 	},
-	username: {
-		type: String,
-		//unique: 'testing error message',
-		//required: 'Please fill in a username',
-		trim: true
-	},
     online: Boolean,
     ville: {
-		type: String,
-		required: 'Title cannot be blank'
-	},
-	job: {
-		type: String,
-		default: '',
-		required: 'Please fill in a job',
+		type: String
 	},
 	notifications : [{
 	    message : { type: String,default: ""},
@@ -184,4 +174,5 @@ UserSchema.methods.authenticate = function(password) {
 	return this.password === this.hashPassword(password);
 };
 
-mongoose.model('User', UserSchema);
+var User = mongoose.model('User', UserSchema);
+module.exports = User;

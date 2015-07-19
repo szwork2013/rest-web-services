@@ -32,7 +32,7 @@ module.exports = {
     secret: "Ci23fWtahDYE3dfirAHrJhzrUEoslIxqwcDN9VNhRJCWf8Tyc1F1mqYrjGYF",
     allJS: [],
     sockets: './api/sockets/**/*.js',
-	models: ['./models/*.js'],
+	models: ['./api/models/*.js'],
 	policies: ['./api/policies/*.js'],
 	CORS_OPTIONS: {
     	headers: {

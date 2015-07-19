@@ -35,63 +35,6 @@ function fetch(headers) {
     }
 };
 
-/**
- * Creates a new token for the user that has been logged in
- *
- * @param user
- * @param req
- * @param res
- * @param next
- *
- * @returns {*}
- */
-
-function create(user, req, res, next) {
-    
-    if (_.isEmpty(user)) {
-        return next(new Error('User data cannot be empty.'));
-    }
-
-    var data = {
-        user: user,
-        token: jsonwebtoken.sign({ _id: user._id }, config.secret, {
-            expiresInMinutes: TOKEN_EXPIRATION
-        })
-    };
-    
-    var decoded = jsonwebtoken.decode(data.token);
-    data.token_exp = decoded.exp;
-    data.token_iat = decoded.iat;
-
-
-    client.set(data.token, JSON.stringify(data), function (err, reply) {
-        if (err) {
-            return next(new Error(err));
-        }
-
-        if (reply) {
-            client.expire(data.token, TOKEN_EXPIRATION_SEC, function (err, reply) {
-                if (err) {
-                    return next(new Error("Can not set the expire value for the token key"));
-                }
-                if (reply) {
-			data.user.password = undefined;
-                    data.user.salt = undefined;	
-                    req.user = data;
-                    next(); // we have succeeded
-                } else {
-                    return next(new Error('Expiration not set on redis'));
-                }
-            });
-        }
-        else {
-            return next(new Error('Token not set in redis'));
-        }
-    });
-
-    return data;
-
-};
 
 /**
  * Fetch the token from redis for the given key
@@ -177,7 +120,7 @@ function verify(req, res, next) {
  * @param headers
  * @returns {boolean}
  */
-function expire(headers) {
+var expire = function(headers) {
 
     var token = fetch(headers);
    
@@ -187,6 +130,64 @@ function expire(headers) {
 
     return token !== null;
 
+};
+
+/**
+ * Creates a new token for the user that has been logged in
+ *
+ * @param user
+ * @param req
+ * @param res
+ * @param next
+ *
+ * @returns {*}
+ */
+
+var create = function(user, req, res, next) {
+    
+    if (_.isEmpty(user)) {
+        console.log("err")
+    }
+
+    var data = {
+        user: user,
+        token: jsonwebtoken.sign({ _id: user._id }, config.secret, {
+            expiresInMinutes: TOKEN_EXPIRATION
+        })
+    };
+    
+    var decoded = jsonwebtoken.decode(data.token);
+    data.token_exp = decoded.exp;
+    data.token_iat = decoded.iat;
+
+
+    client.set(data.token, JSON.stringify(data), function (err, reply) {
+        if (err) {
+            return next(new Error(err));
+        }
+
+        if (reply) {
+            client.expire(data.token, TOKEN_EXPIRATION_SEC, function (err, reply) {
+                if (err) {
+                    return next(new Error("Can not set the expire value for the token key"));
+                }
+                if (reply) {
+            data.user.password = undefined;
+                    data.user.salt = undefined; 
+                    req.user = data;
+                    res.json(req.user)
+                    return next(); // we have succeeded
+                } else {
+                    return next(new Error('Expiration not set on redis'));
+                }
+            });
+        }
+        else {
+            return next(new Error('Token not set in redis'));
+        }
+    });
+
+    return data;
 };
 
 /**
@@ -218,5 +219,6 @@ var middleware = function middleware(req,res,next) {
 module.exports.TOKEN_EXPIRATION = TOKEN_EXPIRATION;
 module.exports.TOKEN_EXPIRATION_SEC = TOKEN_EXPIRATION_SEC;
 
-module.exports.middleware = middleware ;
-
+module.exports.middleware = middleware;
+module.exports.create = create;
+module.exports.expire = expire;
