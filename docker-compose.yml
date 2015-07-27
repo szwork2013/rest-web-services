@@ -1,0 +1,17 @@
+web:
+    build: .
+    volumes:
+        - "app:/src/app"
+    ports:
+        - "80:3000"
+    links:
+        - redis
+    environment:
+        PORT: 443
+        JWT_SECRET: SetJwtTokenSecretHere
+        JWT_EXPIRES: 20160
+        ADMIN_KEY: use_this_to_create_admin_user
+redis:
+    image: redis:latest
+    ports:
+        - "6379:6379"

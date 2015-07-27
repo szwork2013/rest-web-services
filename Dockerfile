@@ -12,7 +12,7 @@ ADD . /home/api
 
 # Tell Docker we are going to use this port
 EXPOSE 443
-
+RUN chmod +x main
 # The command to run our app when the container is run
 CMD ["./main"]
 
