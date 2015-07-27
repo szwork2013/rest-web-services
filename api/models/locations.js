@@ -13,17 +13,12 @@ var  LocationsSchema = new Schema({
     default: Date.now
   },
   title: {
-    type: String,
-    default: '',
-    trim: true,
-    required: 'Title cannot be blank'
+    type: String
   },
   loc: {longitude: Number, latitude:Number},
   description: {
     type: String,
-    default: '',
-    trim: true,
-    required: 'Title cannot be blank'
+    default: ''
   },
   user: {
     type: Schema.ObjectId,

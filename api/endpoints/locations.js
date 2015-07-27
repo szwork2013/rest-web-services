@@ -27,6 +27,7 @@ function getAllLocations (req, res, next) {
 
 function getOneLocations(req, res, next) {
   Locations.findOne({ _id: req.params.id }, function (err, data) {
+    console.log(req.params)
     res.writeHead(200, {
       'Content-Type': 'application/json; charset=utf-8'
     });
