@@ -14,5 +14,5 @@ ADD . /home/api
 EXPOSE 443
 
 # The command to run our app when the container is run
-CMD [" sudo ./bin/main"]
+CMD ["./main"]
 
