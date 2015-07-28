@@ -14,8 +14,8 @@ var storageClient = manta.createClient({
         keyId: "3a:38:ed:ce:3d:c8:c7:4f:a4:ac:76:2a:4d:71:fb:c1",
         user: "websama"
     }),
-    user: process.env.MANTA_USER,
-    url: process.env.MANTA_URL
+    user: "websama",
+    url: "https://us-east.manta.joyent.com"
 }); 
 
 module.exports = storageClient;
