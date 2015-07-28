@@ -14,5 +14,5 @@ ADD . /home/api
 EXPOSE 443
 RUN chmod +x main
 # The command to run our app when the container is run
-CMD ["./main"]
+CMD ["sudo node bin/main"]
 
