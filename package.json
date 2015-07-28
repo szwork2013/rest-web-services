@@ -1,5 +1,5 @@
 {
-  "name": "samaweb",
+  "name": "rest-api",
   "version": "0.0.1",
   "description": "REST Endpoints built using Restify",
   "main": "main.js",
@@ -14,6 +14,7 @@
     "ejs": "^2.3.2",
     "email-templates": "^2.0.0-beta.4",
     "glob": "^5.0.13",
+
     "jsonwebtoken": "^5.0.2",
     "lodash": "^3.10.0",
     "mailgun-js": "^0.7.1",
@@ -31,5 +32,11 @@
     "socketio-jwt": "^4.2.1",
     "underscore": "^1.8.3",
     "uuid-v4": "^0.1.0"
-  }
+  },
+   "devDependencies": {
+      "gulp": "^3.9.0",
+      "gulp-load-plugins": "^1.0.0-rc.1",
+      "run-sequence": "^1.1.2",
+      "gulp-jshint": "^1.11.2"
+   }
 }
