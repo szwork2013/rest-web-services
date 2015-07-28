@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+
 
 var config = require('./config/config'),
 	db = require('./lib/db'),
