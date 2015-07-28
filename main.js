@@ -1,12 +1,10 @@
-
-
 var config = require('./config/config'),
 	db = require('./lib/db'),
     assert = require('assert'),
     fs = require('fs'),
     manta = require('manta'),
 	restify = require('./lib/restify'),
-    storageClient = require('./api/middlewares/manta');
+    storageClient = require('./lib/manta');
 
 db.connect(function() {
 

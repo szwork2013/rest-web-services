@@ -10,7 +10,7 @@ jsonwebtoken = require("jsonwebtoken"),
 errorHandler = require('../../lib/errors/dbError.js'),
 UnauthorizedAccessError = require('../../lib/errors/tokenErrors'),
 mailerService = require('../../lib/mailerService.js'),
-storageClient = require('../middlewares/manta'),
+storageClient = require('../../lib/manta'),
 token = require('../../api/middlewares/token'),
 User = require('../models/user');
 
